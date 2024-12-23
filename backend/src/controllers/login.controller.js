@@ -3,7 +3,7 @@ const cors = require('cors');
 const db = require('../..');
 const login = db.login;
 const signup = db.signup;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 const nodemailer = require('nodemailer');
 
 
@@ -11,8 +11,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',// Use any other mail domain e.g Yahoo, onedrive
     auth: {
-        user: 'vg2556519@gmail.com',//Configure this with main email id
-        pass: 'keza byrs orae udyl',//configure this with main email id password
+        user: 'kanikabhuvad9@gmail.com',//Configure this with main email id
+        pass: 'Kanika@2005',//configure this with main email id password
     }
 })
 
