@@ -5,8 +5,7 @@ const dashboardModel = require("./dashboard.model.js");
 const signupModel = require("./signup.model.js");
 const loginModel = require("./login.model.js");
 const uploadDocsModel = require("./uploadDocs.model.js");
-const marksModel = require("./marks.model.js");
-const uploadDocsModel = require("./uploadDocs.model.js");
+//const marksModel = require("./marks.model.js");
 
 const sequelize = new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD, {
     host: dbconfig.HOST,
@@ -29,7 +28,7 @@ db.signup = signupModel( sequelize, Sequelize );
 db.login = loginModel( sequelize, Sequelize );
 db.dashboard = dashboardModel( sequelize, Sequelize );
 db.uploadDocs = uploadDocsModel( sequelize, Sequelize );
-db.marks = marksModel( sequelize, Sequelize );
+//db.marks = marksModel( sequelize, Sequelize );
 
 //Define Associations
 
@@ -37,7 +36,7 @@ db.marks = marksModel( sequelize, Sequelize );
 module.exports = db;
 db.dashboard.associate = (models) => {
     db.dashboard.hasOne(models.uploadDocs, {foreignKey: 'dashboardId' });
-    db.dashboard.hasOne(models.marks, {foreignKey: 'dashboardId'});
+   // db.dashboard.hasOne(models.marks, {foreignKey: 'dashboardId'});
 };
 
 db.signup.hasOne(db.dashboard, {foreignKey: 'studentForeignId'});

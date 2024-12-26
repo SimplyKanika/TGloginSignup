@@ -4,7 +4,7 @@
 const { Result } = require("ethers");
 
 module.exports = (sequelize, Sequelize) => {
-    const upload_docs = Sequelize.define('DocumentsDuringAdmission',{
+    const upload_docs = sequelize.define('DocumentsDuringAdmission',{
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
