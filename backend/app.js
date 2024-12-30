@@ -45,6 +45,8 @@ app.use('/api/signup', signupRoutes);
 const loginRoutes = require('./src/routes/login.route');
 app.use('/api/login', loginRoutes);
 
+const dashboardRoutes = require('./src/routes/dashboard.route');
+app.use('/api/dashboard', dashboardRoutes);
 //Importing Dashboard routes
 // const dashboardRoutes = require('./src/routes/dashboard.route');
 // app.use('/api/dashboard', dashboardRoutes);
