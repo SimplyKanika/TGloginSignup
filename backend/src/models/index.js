@@ -1,22 +1,14 @@
-const dbconfig = require("../config/db.config.js");
+const Sequelize = require("sequelize");
+const dbConfig = require("../config/db.config.js");
 
-const Sequelize= require("sequelize");
-const dashboardModel = require("./dashboard.model.js");
-const signupModel = require("./signup.model.js");
-const loginModel = require("./login.model.js");
-const uploadDocsModel = require("./uploadDocs.model.js");
-//const marksModel = require("./marks.model.js");
-
-const sequelize = new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD, {
-    host: dbconfig.HOST,
-    dialect: dbconfig.dialect,
-    //operatorsAliases: false,
-
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+    host: dbConfig.HOST,
+    dialect: dbConfig.dialect,
     pool: {
-        max: dbconfig.pool.max,
-        min: dbconfig.pool.min,
-        acquire: dbconfig.pool.acquire,
-        idle: dbconfig.pool.idle
+        max: dbConfig.pool.max,
+        min: dbConfig.pool.min,
+        acquire: dbConfig.pool.acquire,
+        idle: dbConfig.pool.idle
     }
 });
 
@@ -24,26 +16,16 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.signup = signupModel( sequelize, Sequelize );
-db.login = loginModel( sequelize, Sequelize );
-db.dashboard = dashboardModel( sequelize, Sequelize );
-db.uploadDocs = uploadDocsModel( sequelize, Sequelize );
-//db.marks = marksModel( sequelize, Sequelize );
+db.signup = require("./signup.model.js")(sequelize, Sequelize);
+db.login = require("./login.model.js")(sequelize, Sequelize);
+db.dashboard = require("./dashboard.model.js")(sequelize, Sequelize);
+db.uploadDocs = require("./uploadDocs.model.js")(sequelize, Sequelize);
 
-//Define Associations
+// Define Associations after all models are loaded
+db.signup.hasOne(db.dashboard, { foreignKey: 'student_foregin_id' });
+db.dashboard.belongsTo(db.signup, { foreignKey: 'student_foregin_id' });
 
+db.dashboard.hasOne(db.uploadDocs, { foreignKey: 'Dashboard_id' });
+db.uploadDocs.belongsTo(db.dashboard, { foreignKey: 'Dashboard_id' });
 
 module.exports = db;
-db.dashboard.associate = (models) => {
-    db.dashboard.hasOne(models.uploadDocs, {foreignKey: 'dashboardId' });
-   // db.dashboard.hasOne(models.marks, {foreignKey: 'dashboardId'});
-};
-
-db.signup.hasOne(db.dashboard, {foreignKey: 'studentForeignId'});
-db.dashboard.belongsTo(db.signup, {foreignKey: 'studentForeignId'});
-
-Object.keys(db).forEach(modelName => {
-    if(db[modelName].associate){
-        db[modelName].associate(db);
-    }
-});

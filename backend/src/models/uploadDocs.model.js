@@ -1,63 +1,59 @@
-// const Sequelize = require('sequelize');
-// const sequelize = require('../config/db.config');
-
-const { Result } = require("ethers");
-
 module.exports = (sequelize, Sequelize) => {
-    const upload_docs = sequelize.define('DocumentsDuringAdmission',{
+    const upload_docs = sequelize.define('DocumentsDuringAdmission', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        Dashboard_id:{
+        Dashboard_id: {
             type: Sequelize.INTEGER,
             references: {
                 model: 'dashboard',
                 key: 'dashboard_primary_key'
-            }
+            },
+            allowNull: true,
         },
-        result_12th:{
+        result_12th: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        aadharCard:{
+        aadharCard: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        panCard:{
+        panCard: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        mhtcetResult:{
+        mhtcetResult: {
             type: Sequelize.STRING,
-            allowNull: false, 
+            allowNull: false,
         },
-        admissionCard:{
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        capCard:{
+        admissionCard: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        domicile:{
+        capCard: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        domicile: {
             type: Sequelize.STRING,
             allowNull: true
         },
-        birthCertificate:{
+        birthCertificate: {
             type: Sequelize.STRING,
             allowNull: true
         },
-        leavingCertificate:{
+        leavingCertificate: {
             type: Sequelize.STRING,
             allowNull: true
         },
-        filePath:{
+        filePath: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        fileType:{
+        fileType: {
             type: Sequelize.STRING,
             allowNull: false
         }
