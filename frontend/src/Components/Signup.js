@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Header from './Header'; // Import the Header component
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-  const navigate = useNavigate(); // Initialize navigate for redirection
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     studentName: '',
@@ -94,7 +93,7 @@ const SignUp = () => {
           }
         );
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           toast.success('Account created successfully!');
           setTimeout(() => {
             navigate('/dashboard'); // Redirect to Dashboard
@@ -112,7 +111,6 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 w-auto">
-      {/* <Header /> Add the Header component here */}
       <div className="w-full max-w-3xl bg-slate-10 shadow-md rounded-lg p-6 m-2">
         <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">Sign Up</h1>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
