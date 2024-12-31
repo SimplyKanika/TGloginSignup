@@ -11,8 +11,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',// Use any other mail domain e.g Yahoo, onedrive
     auth: {
-        user: 'kanikabhuvad9@gmail.com',//Configure this with main email id
-        pass: 'Kanika@2005',//configure this with main email id password
+        user: 'dubeyaayush333@gmail.com',//Configure this with main email id
+        pass: 'Ayush@4451',//configure this with main email id password
     }
 })
 
@@ -47,7 +47,7 @@ async function generateandStoreOTP(email){
 
 async function sendOTPEmail(email, otp){
     const mailOptions = {
-        from: 'vg2556519@gmail.com',
+        from: 'dubeyaayush333@gmail.com ',
         to: email,
         subject: 'YOUR OTP CODE',
         text: `Your OTP code is ${otp}. it will expire in 5 minutes`,

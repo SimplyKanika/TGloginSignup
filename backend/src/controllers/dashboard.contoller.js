@@ -1,3 +1,4 @@
+const { get } = require('http');
 const db = require('../models');
 const multer = require('multer');
 const path = require('path');
@@ -77,6 +78,17 @@ const uploadDocument = async(req, res) => {
     });
 };
 
+const getDocuments = async(req, res) => {
+    try{
+        const documents = await db.uploadDocs.findAll();
+        res.status(200).json({ documents });
+    } catch(error){
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving documents', error });
+    }
+};
+
 module.exports = {
-    uploadDocument
+    uploadDocument,
+    getDocuments
 };
