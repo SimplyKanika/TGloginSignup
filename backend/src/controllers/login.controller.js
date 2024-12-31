@@ -9,11 +9,14 @@ const nodemailer = require('nodemailer');
 
 //configuring the nodemailer transporter
 const transporter = nodemailer.createTransport({
-    service: 'gmail',// Use any other mail domain e.g Yahoo, onedrive
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: 'dubeyaayush333@gmail.com',//Configure this with main email id
-        pass: 'Ayush@4451',//configure this with main email id password
-    }
+      user: "dubeyaayush333@gmail.com",
+      pass: "Ayush@4451",
+    },
 })
 
 //Code for generating OTP
