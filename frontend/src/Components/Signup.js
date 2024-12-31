@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Header from './Header'; // Import the Header component
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-  const navigate = useNavigate(); // Initialize navigate for redirection
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     studentName: '',
-    photo: '',
     surname: '',
     gender: '',
     studentPhone: '',
@@ -21,8 +19,6 @@ const SignUp = () => {
     fathersPhone: '',
     mothersName: '',
     mothersPhone: '',
-    fatherEmail: '',
-    motherEmail: '',
     admissionYear: '',
     address: '',
     pincode: '',
@@ -31,10 +27,6 @@ const SignUp = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, photo: e.target.files[0] });
   };
 
   const validateForm = () => {
@@ -81,8 +73,6 @@ const SignUp = () => {
             father_phone_no: formData.fathersPhone,
             mother_name: formData.mothersName,
             mother_phone_no: formData.mothersPhone,
-            father_email: formData.fatherEmail || '', // Optional
-            mother_email: formData.motherEmail || '', // Optional
             year_of_admission: formData.admissionYear,
             student_address: formData.address,
             pincode: formData.pincode,
@@ -94,7 +84,7 @@ const SignUp = () => {
           }
         );
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           toast.success('Account created successfully!');
           setTimeout(() => {
             navigate('/dashboard'); // Redirect to Dashboard
@@ -112,7 +102,6 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 w-auto">
-      {/* <Header /> Add the Header component here */}
       <div className="w-full max-w-3xl bg-slate-10 shadow-md rounded-lg p-6 m-2">
         <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">Sign Up</h1>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,12 +111,6 @@ const SignUp = () => {
             placeholder="Student Name"
             className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={handleInputChange}
-          />
-          <input
-            type="file"
-            name="photo"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleFileChange}
           />
           <input
             type="text"
@@ -191,13 +174,6 @@ const SignUp = () => {
             onChange={handleInputChange}
           />
           <input
-            type="email"
-            name="fatherEmail"
-            placeholder="Father's Email (Optional)"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleInputChange}
-          />
-          <input
             type="text"
             name="mothersName"
             placeholder="Mother's Name"
@@ -208,13 +184,6 @@ const SignUp = () => {
             type="text"
             name="mothersPhone"
             placeholder="Mother's Phone"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            name="motherEmail"
-            placeholder="Mother's Email (Optional)"
             className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={handleInputChange}
           />

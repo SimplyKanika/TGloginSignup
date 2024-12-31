@@ -21,4 +21,6 @@ router.post('/upload/birth', dashboardController.uploadDocument);
 //leaving Certificate
 router.post('/upload/leaving', dashboardController.uploadDocument);
 
+
+router.get('/getDocuments', dashboardController.getDocuments);
 module.exports = router;

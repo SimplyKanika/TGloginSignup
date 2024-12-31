@@ -1,8 +1,5 @@
-const express = require('express');
-const cors = require('cors');
 const db = require("../../app"); // Ensure this points to your database configuration
 const signup = db.signup; // Signup model
-// const Op = db.Sequelize.Op;
 
 // Function to create a new user
 exports.create = (req, res) => {
