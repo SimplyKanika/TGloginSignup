@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('../..');
+const db = require('../models/index');
 const login = db.login;
 const signup = db.signup;
+const HTML_TEMPLATE = require('../middleware/html_template.middleware');
+const sendmail = require('../middleware/sendmail.middleware');
+
 // const Op = db.Sequelize.Op;
 const nodemailer = require('nodemailer');
 

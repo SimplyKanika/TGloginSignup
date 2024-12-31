@@ -1,8 +1,8 @@
-const db = require("../../app"); // Ensure this points to your database configuration
+const db = require("../models/index"); // Ensure this points to your database configuration
 const signup = db.signup; // Signup model
 
 // Function to create a new user
-exports.create = (req, res) => {
+module.exports.create = (req, res) => {
     console.log(req.body);
 
     // Validate request
