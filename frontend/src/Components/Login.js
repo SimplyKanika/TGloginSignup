@@ -16,7 +16,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/login/generate-otp', {
+      const response = await fetch('http://localhost:8080/generate-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/login/login', {
+      const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
