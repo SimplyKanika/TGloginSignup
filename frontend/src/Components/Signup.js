@@ -9,7 +9,6 @@ const SignUp = () => {
 
   const [formData, setFormData] = useState({
     studentName: '',
-    photo: '',
     surname: '',
     gender: '',
     studentPhone: '',
@@ -20,8 +19,6 @@ const SignUp = () => {
     fathersPhone: '',
     mothersName: '',
     mothersPhone: '',
-    fatherEmail: '',
-    motherEmail: '',
     admissionYear: '',
     address: '',
     pincode: '',
@@ -30,10 +27,6 @@ const SignUp = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, photo: e.target.files[0] });
   };
 
   const validateForm = () => {
@@ -80,8 +73,6 @@ const SignUp = () => {
             father_phone_no: formData.fathersPhone,
             mother_name: formData.mothersName,
             mother_phone_no: formData.mothersPhone,
-            father_email: formData.fatherEmail || '', // Optional
-            mother_email: formData.motherEmail || '', // Optional
             year_of_admission: formData.admissionYear,
             student_address: formData.address,
             pincode: formData.pincode,
@@ -120,12 +111,6 @@ const SignUp = () => {
             placeholder="Student Name"
             className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={handleInputChange}
-          />
-          <input
-            type="file"
-            name="photo"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleFileChange}
           />
           <input
             type="text"
@@ -189,13 +174,6 @@ const SignUp = () => {
             onChange={handleInputChange}
           />
           <input
-            type="email"
-            name="fatherEmail"
-            placeholder="Father's Email (Optional)"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleInputChange}
-          />
-          <input
             type="text"
             name="mothersName"
             placeholder="Mother's Name"
@@ -206,13 +184,6 @@ const SignUp = () => {
             type="text"
             name="mothersPhone"
             placeholder="Mother's Phone"
-            className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            name="motherEmail"
-            placeholder="Mother's Email (Optional)"
             className="p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={handleInputChange}
           />
