@@ -1,4 +1,4 @@
-const db = require("../../app"); // Ensure this points to your database configuration
+const db = require("../models"); // Ensure this points to your database configuration
 const signup = db.signup; // Signup model
 
 // Function to create a new user
@@ -32,11 +32,11 @@ exports.create = (req, res) => {
         gender: req.body.gender,
         stud_phone_no: req.body.stud_phone_no,
         stud_email: req.body.stud_email,
-        Branch: req.body.Branch,
-        Division: req.body.Division,
+        branch: req.body.Branch,
+        division: req.body.Division,
         father_name: req.body.father_name,
         father_email: req.body.father_email || null, // Optional field
-        father_phone_no: req.body.father_phone_no,
+        parent_phone_no: req.body.father_phone_no,
         mother_name: req.body.mother_name,
         mother_email: req.body.mother_email || null, // Optional field
         mother_phone_no: req.body.mother_phone_no,

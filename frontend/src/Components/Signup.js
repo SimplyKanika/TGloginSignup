@@ -60,7 +60,7 @@ const SignUp = () => {
     if (validateForm()) {
       try {
         const response = await axios.post(
-          'http://localhost:8080/api/signup',
+          'http://localhost:8080/signup',
           {
             student_name: formData.studentName,
             surname: formData.surname,

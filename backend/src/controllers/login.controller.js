@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('../..');
+const db = require('../models');
 const login = db.login;
 const signup = db.signup;
 // const Op = db.Sequelize.Op;
@@ -9,11 +9,14 @@ const nodemailer = require('nodemailer');
 
 //configuring the nodemailer transporter
 const transporter = nodemailer.createTransport({
-    service: 'gmail',// Use any other mail domain e.g Yahoo, onedrive
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: 'dubeyaayush333@gmail.com',//Configure this with main email id
-        pass: 'Ayush@4451',//configure this with main email id password
-    }
+      user: "nj6097114@gmail.com",
+      pass: "ojykwedlcfmshjcr",
+    },
 })
 
 //Code for generating OTP
@@ -64,7 +67,7 @@ async function verifyOTP(email, otp){
     }
     console.log("exp",user.otp_expiry);
     console.log(new Date());
-    if(user.otp === otp && (new Date() < new Date(user.otp_expiry))){
+    if(user.otp === otp ){
         return true;
     } else {
         throw new Error('Invalid OTP');
