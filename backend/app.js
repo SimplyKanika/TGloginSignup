@@ -40,13 +40,13 @@ db.sequelize.sync()
 
 //IMPORTING AND USING ROUTES
 const signupRoutes = require('./src/routes/signup.route');
-app.use('/api/signup', signupRoutes);
+app.use('/signup', signupRoutes);
 
 const loginRoutes = require('./src/routes/login.route');
-app.use('/api/login', loginRoutes);
+app.use('/', loginRoutes);
 
 const dashboardRoutes = require('./src/routes/dashboard.route');
-app.use('/api/dashboard', dashboardRoutes);
+app.use('/dashboard', dashboardRoutes);
 //Importing Dashboard routes
 // const dashboardRoutes = require('./src/routes/dashboard.route');
 // app.use('/api/dashboard', dashboardRoutes);
