@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('../models/index');
+const db = require('../models');
 const login = db.login;
 const signup = db.signup;
 const HTML_TEMPLATE = require('../middleware/html_template.middleware');
@@ -17,8 +17,8 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-      user: "dubeyaayush333@gmail.com",
-      pass: "Ayush@4451",
+      user: "nj6097114@gmail.com",
+      pass: "ojykwedlcfmshjcr",
     },
 })
 
@@ -70,7 +70,7 @@ async function verifyOTP(email, otp){
     }
     console.log("exp",user.otp_expiry);
     console.log(new Date());
-    if(user.otp === otp && (new Date() < new Date(user.otp_expiry))){
+    if(user.otp === otp ){
         return true;
     } else {
         throw new Error('Invalid OTP');
