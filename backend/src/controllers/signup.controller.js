@@ -2,7 +2,7 @@ const db = require("../models"); // Ensure this points to your database configur
 const signup = db.signup; // Signup model
 
 // Function to create a new user
-exports.create = (req, res) => {
+module.exports.create = (req, res) => {
     console.log(req.body);
 
     // Validate request
