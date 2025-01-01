@@ -1,5 +1,5 @@
 const { get } = require('http');
-const db = require('../models/index');
+const db = require('../models');
 const multer = require('multer');
 const path = require('path');
 //const { default: Dashboard } = require('../../../frontend/src/Components/Dashboard');
