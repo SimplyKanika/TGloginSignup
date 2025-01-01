@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
                 model: 'dashboard',
                 key: 'dashboard_primary_key'
             },
-            allowNull: true,
+            allowNull: false,
         },
         result_12th: {
             type: Sequelize.STRING,

@@ -1,15 +1,13 @@
-const { get } = require('http');
-const db = require('../models/index');
+const db = require('../models');
 const multer = require('multer');
 const path = require('path');
-//const { default: Dashboard } = require('../../../frontend/src/Components/Dashboard');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const { documentType } = req.body;
         let dest = 'backend/uploads';
 
-        switch( documentType ){
+        switch (documentType) {
             case 'aadharCard':
                 dest = 'backend/uploads/aadharCard';
                 break;
@@ -28,7 +26,9 @@ const storage = multer.diskStorage({
             case 'capCard':
                 dest = 'backend/uploads/capCard';
                 break;
-            case 'domicile' || 'birthCertificate' || 'leavingCertificate':
+            case 'domicile':
+            case 'birthCertificate':
+            case 'leavingCertificate':
                 dest = 'backend/uploads/domicile';
                 break;
             default:
@@ -38,23 +38,29 @@ const storage = multer.diskStorage({
         cb(null, dest);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now()+ '-' +file.originalname);
+        cb(null, Date.now() + '-' + file.originalname);
     }
 });
 
-const upload = multer({ storage: storage}).single('file');
+const upload = multer({ storage: storage }).single('file');
 
-const uploadDocument = async(req, res) => {
-    upload(req, res, async(err) => {
-        if(err){
-            return res.status(500).json({ message: 'File upload failed', error: err })
+const uploadDocument = async (req, res) => {
+    upload(req, res, async (err) => {
+        if (err) {
+            return res.status(500).json({ message: 'File upload failed', error: err });
         }
 
-        try{
-            const { result_12th, aadharCard, panCard, mhtcetResult, admissionCard, capCard, domicile, birthCertificate, leavingCertificate, studentForeginId } = req.body;
+        try {
+            const {
+                result_12th, aadharCard, panCard, mhtcetResult, admissionCard,
+                capCard, domicile, birthCertificate, leavingCertificate
+            } = req.body;
+
+            const studentForeginId = req.body.studentForeginId; // Ensure this is set correctly
 
             const uploadDoc = await db.uploadDocs.create({
-                Dashboard_id: req.body.Dashboard, //We need to ensure to pass this in the request
+                Dashboard_id: studentForeginId,
+                admissionCard,
                 result_12th,
                 aadharCard,
                 panCard,
@@ -66,23 +72,26 @@ const uploadDocument = async(req, res) => {
                 filePath: req.file.path,
                 fileType: req.file.mimetype
             });
-            
-            res.status(201).json({ 
+
+            res.status(201).json({
                 message: 'Document uploaded successfully',
                 data: uploadDoc
             });
-        } catch(error){
-            console.error(error);
-            res.status(500).json({ message: 'Error saving the document to database', err });
+        } catch (error) {
+            console.error("Database error:", error);
+            res.status(500).json({ message: 'Error saving the document to database', error });
         }
     });
 };
 
-const getDocuments = async(req, res) => {
-    try{
-        const documents = await db.uploadDocs.findAll();
+const getDocuments = async (req, res) => {
+    try {
+        const studentForeginId = req.params.studentForeginId; // Ensure this is set correctly
+        const documents = await db.uploadDocs.findAll({
+            where: { Dashboard_id: studentForeginId }
+        });
         res.status(200).json({ documents });
-    } catch(error){
+    } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error retrieving documents', error });
     }
